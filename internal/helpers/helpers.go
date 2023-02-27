@@ -16,8 +16,16 @@ func ResponseSuccess(c *gin.Context, result any, status int) {
 	})
 }
 
+func AnyToString(value any) string {
+	if value != nil {
+		return fmt.Sprint(value)
+	}
+
+	return ""
+}
+
 func ResponseSuccessWithMessage(c *gin.Context, result any, message string) {
-	c.IndentedJSON(http.StatusAccepted, types.Response{
+	c.IndentedJSON(http.StatusOK, types.Response{
 		Status:  "successful",
 		Result:  result,
 		Message: message,
@@ -25,7 +33,7 @@ func ResponseSuccessWithMessage(c *gin.Context, result any, message string) {
 }
 
 func ResponseWithMeta(c *gin.Context, result any, meta types.Meta) {
-	c.IndentedJSON(http.StatusAccepted, types.Response{
+	c.IndentedJSON(http.StatusOK, types.Response{
 		Status: "successful",
 		Result: result,
 		Meta:   meta,
